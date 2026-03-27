@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx:1.25.1  # TASK 1: Specific version (not latest)
+    ports:
+    - containerPort: 80

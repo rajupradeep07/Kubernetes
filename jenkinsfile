@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // 1. Pull the code from your Git repo
+                git branch: 'main', url: 'https://github.com/rajupradeep07/Kubernetes.git'
+            }
+        }
+
+        stage('Apply') {
+            steps {
+                // 2. Create the Pod using your YAML file
+                sh 'kubectl apply -f simplenginx.yaml'
+            }
+        }
+
+        stage('Verify') {
+            steps {
+                // 3. Wait a few seconds for the pod to start
+                sleep 5
+                
+                // 4. Check if the pod was created successfully
+                sh 'kubectl get pods'
+            }
+        }
+    }
+}
